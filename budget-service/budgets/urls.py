@@ -1,10 +1,9 @@
-from rest_framework.routers import DefaultRouter
-from .views import BudgetViewSet, TransactionViewSet
+from django.urls import path
+from .views import BudgetDetailView, EntryCreateView, BudgetListCreateView
 
 
-router = DefaultRouter()
-router.register('budgets', BudgetViewSet)
-router.register('transactions', TransactionViewSet)
-
-
-urlpatterns = router.urls
+urlpatterns = [
+    path('budgets/<int:pk>/', BudgetDetailView.as_view(), name='budget-detail'),
+    path('budgets/<int:budget_id>/entries/', EntryCreateView.as_view(), name='entry-create'),
+    path('budgets/', BudgetListCreateView.as_view(), name='budget-list-create'),
+]

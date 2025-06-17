@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Budget, Transaction
+from .models import Budget, Entry
 
 
 class BudgetSerializer(serializers.ModelSerializer):
@@ -8,7 +8,7 @@ class BudgetSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class TransactionSerializer(serializers.ModelSerializer):
+class EntrySerializer(serializers.ModelSerializer):
     class Meta:
-        model = Transaction
+        model = Entry
         fields = '__all__'

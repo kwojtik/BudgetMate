@@ -11,5 +11,16 @@ class RegisterView(generics.CreateAPIView):
     permission_classes = [AllowAny]
 
     def perform_create(self, serializer):
-        user = serializer.save()
-        send_kafka_message("user_registered", {"id": user.id, "email": user.email})
+        data = serializer.validated_data
+
+        user = CustomUser(
+            username=data['username'],
+            email=data['email'],
+        )
+        user.set_password(data['password'])
+        user.save()
+
+        send_kafka_message("user_registered", {
+            "id": user.id,
+            "email": user.email
+        })
