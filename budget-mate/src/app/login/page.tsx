@@ -24,7 +24,7 @@ export default function LoginPage() {
       localStorage.setItem('access', data.access);
       router.push('/dashboard');
     } else {
-      alert('Nieprawidłowe dane logowania');
+      alert('Wrong login data');
     }
   };
 
@@ -40,10 +40,10 @@ export default function LoginPage() {
     });
 
     if (res.ok) {
-      alert('✅ Rejestracja zakończona sukcesem! Możesz się teraz zalogować.');
+      alert('Registration complete');
       setShowRegister(false);
     } else {
-      alert('❌ Błąd rejestracji. Spróbuj ponownie.');
+      alert('Error during registration');
     }
   };
 
@@ -55,7 +55,7 @@ export default function LoginPage() {
           <div>
             <h1 className="text-4xl font-bold mb-4">Welcome to BudgetMate</h1>
             <p className="text-lg">
-              Planowanie budżetu nigdy nie było łatwiejsze. Zaloguj się i zacznij śledzić swoje finanse.
+              Budget planning never was easier.
             </p>
           </div>
         </div>
@@ -84,7 +84,7 @@ export default function LoginPage() {
             </div>
             <div className="flex justify-between items-center mb-6 text-sm text-gray-500">
               <label><input type="checkbox" className="mr-1" /> Remember me</label>
-              <button onClick={() => setShowRegister(true)} className="hover:underline text-pink-500">Zarejestruj się</button>
+              <button onClick={() => setShowRegister(true)} className="hover:underline text-pink-500">Register</button>
             </div>
             <button
               className="w-full py-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white font-semibold rounded hover:opacity-90 transition"
@@ -100,10 +100,10 @@ export default function LoginPage() {
       {showRegister && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded p-6 w-full max-w-md shadow-lg">
-            <h2 className="text-xl font-semibold mb-4">Rejestracja</h2>
+            <h2 className="text-xl font-semibold mb-4">Register</h2>
             <input
               type="text"
-              placeholder="Nazwa użytkownika"
+              placeholder="Username"
               className="input mb-3"
               onChange={(e) => setRegisterUsername(e.target.value)}
             />
@@ -115,13 +115,13 @@ export default function LoginPage() {
             />
             <input
               type="password"
-              placeholder="Hasło"
+              placeholder="Password"
               className="input mb-4"
               onChange={(e) => setRegisterPassword(e.target.value)}
             />
             <div className="flex justify-end gap-2">
-              <button className="btn bg-gray-300 text-black" onClick={() => setShowRegister(false)}>Anuluj</button>
-              <button className="btn bg-purple-500 text-white" onClick={handleRegister}>Zarejestruj się</button>
+              <button className="btn bg-gray-300 text-black" onClick={() => setShowRegister(false)}>Cancel</button>
+              <button className="btn bg-purple-500 text-white" onClick={handleRegister}>Register</button>
             </div>
           </div>
         </div>

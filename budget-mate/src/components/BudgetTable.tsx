@@ -1,29 +1,42 @@
+'use client';
 import { useState } from 'react';
 
-export default function BudgetTable({ entries, setEntries, budgetId }: { entries: any[], setEntries: Function, budgetId: string }) {
+export default function BudgetTable({ entries, setEntries, budgetId, total }: { entries: any[], setEntries: Function, budgetId: string, total: number }) {
   const [isAdding, setIsAdding] = useState(false);
   const [newEntry, setNewEntry] = useState({ date: '', what: '', category: '', price: '' });
 
-    const handleAddRow = async () => {
+  const handleAddRow = async () => {
     const token = localStorage.getItem('access');
+    if (!token) {
+      alert("No token - session ended");
+      return;
+    }
+
+    const entryData = {
+      ...newEntry,
+      price: parseFloat(newEntry.price),
+    };
+
     const res = await fetch(`${process.env.NEXT_PUBLIC_BUDGET_API}/api/budgets/${budgetId}/entries/`, {
-        method: 'POST',
-        headers: {
+      method: 'POST',
+      headers: {
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(newEntry),
+      },
+      body: JSON.stringify(entryData),
     });
 
     if (res.ok) {
-        const saved = await res.json();
-        setEntries([...entries, saved]);
-        setNewEntry({ date: '', what: '', category: '', price: '' });
-        setIsAdding(false);
+      const saved = await res.json();
+      setEntries([...entries, saved]);
+      setNewEntry({ date: '', what: '', category: '', price: '' });
+      setIsAdding(false);
     } else {
-        alert('Nie udało się zapisać wpisu.');
+      const error = await res.json();
+      console.error("Save error:", error);
+      alert('Save error. Check data');
     }
-    };
+  };
 
   return (
     <div className="bg-white text-black rounded shadow overflow-x-auto">
@@ -57,6 +70,10 @@ export default function BudgetTable({ entries, setEntries, budgetId }: { entries
         </tbody>
       </table>
 
+      <div className="mt-6 text-xl font-semibold text-right pr-4">
+        Sum: {total.toFixed(2)} zł
+      </div>
+
       <div className="p-4">
         {!isAdding ? (
           <button onClick={() => setIsAdding(true)} className="btn bg-gradient-to-r from-pink-500 to-orange-500 text-white">
@@ -64,7 +81,7 @@ export default function BudgetTable({ entries, setEntries, budgetId }: { entries
           </button>
         ) : (
           <button onClick={handleAddRow} className="btn bg-purple-600 text-white">
-            save
+            Save
           </button>
         )}
       </div>

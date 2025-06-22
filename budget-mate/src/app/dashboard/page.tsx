@@ -20,12 +20,12 @@ export default function Dashboard() {
         if (Array.isArray(data)) {
           setBudgets(data);
         } else {
-          console.warn('Dane nie są tablicą:', data);
-          setBudgets([]); // fallback
+          console.warn('Wrong data format:', data);
+          setBudgets([]);
         }
       })
       .catch(err => {
-        console.error('Błąd pobierania:', err);
+        console.error('Get error:', err);
         setBudgets([]);
       });
   }, []);
@@ -47,7 +47,7 @@ export default function Dashboard() {
       setBudgets([...budgets, created]);
       setNewName('');
     } else {
-      alert('Błąd przy dodawaniu budżetu');
+      alert('Error adding Bbudget');
     }
   };
 
@@ -55,13 +55,13 @@ export default function Dashboard() {
     <div className="flex h-screen">
       <Sidebar />
       <div className="flex-1 bg-gradient-to-br from-purple-600 via-pink-500 to-orange-400 text-white p-8">
-        <h1 className="text-3xl font-bold mb-6">Twoje budżety</h1>
+        <h1 className="text-3xl font-bold mb-6">Your Budgets</h1>
 
         <div className="flex items-center mb-6 gap-2">
           <input
             type="text"
             className="input"
-            placeholder="Nazwa nowego budżetu"
+            placeholder="New budget"
             value={newName}
             onChange={(e) => setNewName(e.target.value)}
           />

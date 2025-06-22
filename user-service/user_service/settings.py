@@ -5,7 +5,8 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Podstawowe bezpieczeństwo
-SECRET_KEY = 'tu-wstaw-swoj-tajny-klucz'
+SECRET_KEY = 'a8d6n3%$@9012hjJFDKjhf82nj-SECRET-real-KEY'
+
 DEBUG = True  # lub False w środowisku produkcyjnym
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 

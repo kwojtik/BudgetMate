@@ -19,12 +19,15 @@ export default function BudgetPage({ params }: { params: { id: string } }) {
       });
   }, [params.id]);
 
+  const total = entries.reduce((acc, entry) => acc + parseFloat(entry.price), 0);
+
   return (
     <div className="flex h-screen">
       <Sidebar />
       <div className="flex-1 bg-gradient-to-br from-purple-600 via-pink-500 to-orange-400 p-8 text-white">
         <h1 className="text-3xl font-bold mb-6">{budgetName}</h1>
-        <BudgetTable entries={entries} setEntries={setEntries} budgetId={params.id}/>
+
+        <BudgetTable entries={entries} setEntries={setEntries} budgetId={params.id} total={total} />
       </div>
     </div>
   );
