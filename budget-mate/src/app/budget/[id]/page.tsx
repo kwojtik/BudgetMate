@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import Sidebar from '@/components/Sidebar';
 import BudgetTable from '@/components/BudgetTable';
+import BudgetCharts from '@/components/BudgetCharts';
 
 export default function BudgetPage({ params }: { params: { id: string } }) {
   const [entries, setEntries] = useState<any[]>([]);
@@ -28,6 +29,7 @@ export default function BudgetPage({ params }: { params: { id: string } }) {
         <h1 className="text-3xl font-bold mb-6">{budgetName}</h1>
 
         <BudgetTable entries={entries} setEntries={setEntries} budgetId={params.id} total={total} />
+        <BudgetCharts entries={entries} />
       </div>
     </div>
   );
