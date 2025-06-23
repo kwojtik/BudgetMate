@@ -3,7 +3,7 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'a8d6n3%$@9012hjJFDKjhf82nj-SECRET-real-KEY'
+SECRET_KEY = 'a8d6n3%$@9012hjJFDKjhf82nj-SECRET-real-KEY' // feel free to use xP
 DEBUG = True
 ALLOWED_HOSTS = ['*']
 
