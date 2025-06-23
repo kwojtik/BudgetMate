@@ -2,7 +2,6 @@ import os
 import django
 
 
-# Django
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "budget_service.settings")
 django.setup()
 

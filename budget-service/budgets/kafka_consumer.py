@@ -3,11 +3,13 @@ import django
 import json
 from kafka import KafkaConsumer
 
-# Konfiguracja środowiska Django
+
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'budget_service.settings')
 django.setup()
 
+
 from budgets.models import Budget, LocalUser
+
 
 def start_kafka_consumer():
     print("▶ Uruchamianie Kafka Consumer (user_registered)")
@@ -28,7 +30,6 @@ def start_kafka_consumer():
 
         print(f"Odebrano użytkownika: {email} (id={user_id})")
 
-        # 1. Dodaj użytkownika lokalnie (jeśli nie istnieje)
         if not LocalUser.objects.filter(id=user_id).exists():
             LocalUser.objects.create_user(
                 id=user_id,
@@ -37,7 +38,6 @@ def start_kafka_consumer():
             )
             print(f"Dodano LocalUser({user_id})")
 
-        # 2. Dodaj domyślny budżet (jeśli nie istnieje)
         if not Budget.objects.filter(owner_id=user_id).exists():
             Budget.objects.create(
                 name=f"Budżet domowy - {email}",

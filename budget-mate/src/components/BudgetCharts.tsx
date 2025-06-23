@@ -5,7 +5,6 @@ import { parseISO, format, subMonths, isAfter } from 'date-fns';
 export default function BudgetCharts({ entries }: { entries: any[] }) {
   const now = new Date();
 
-  // Filtrowanie danych z ostatnich 30 dni
   const last30Days = entries.filter(entry => {
     const date = new Date(entry.date);
     return isAfter(date, subMonths(now, 1));
@@ -21,7 +20,6 @@ export default function BudgetCharts({ entries }: { entries: any[] }) {
     .map(([date, sum]) => ({ date, sum }))
     .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
 
-  // Dane z ostatnich 6 miesięcy grupowane miesięcznie
   const last6Months = entries.filter(entry => {
     const date = new Date(entry.date);
     return isAfter(date, subMonths(now, 6));

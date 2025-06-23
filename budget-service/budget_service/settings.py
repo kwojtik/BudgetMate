@@ -1,15 +1,12 @@
 import os
 from pathlib import Path
 
-# Ścieżka bazowa
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Bezpieczeństwo
 SECRET_KEY = 'a8d6n3%$@9012hjJFDKjhf82nj-SECRET-real-KEY'
 DEBUG = True
 ALLOWED_HOSTS = ['*']
 
-# Aplikacje
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -23,7 +20,6 @@ INSTALLED_APPS = [
     'budgets',
 ]
 
-# Middleware
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -36,10 +32,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-# URL routing
 ROOT_URLCONF = 'budget_service.urls'
 
-# Szablony
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -56,10 +50,8 @@ TEMPLATES = [
     },
 ]
 
-# WSGI
 WSGI_APPLICATION = 'budget_service.wsgi.application'
 
-# Baza danych
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -69,7 +61,6 @@ DATABASES = {
 
 AUTH_USER_MODEL = 'budgets.LocalUser'
 
-# Uwierzytelnianie
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -79,16 +70,13 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-# Język i czas
 LANGUAGE_CODE = 'pl'
 TIME_ZONE = 'Europe/Warsaw'
 USE_I18N = True
 USE_TZ = True
 
-# Statyczne pliki (admin, CSS itp.)
 STATIC_URL = 'static/'
 
-# REST framework
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',

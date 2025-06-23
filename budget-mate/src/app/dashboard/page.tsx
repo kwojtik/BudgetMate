@@ -66,7 +66,7 @@ export default function Dashboard() {
             onChange={(e) => setNewName(e.target.value)}
           />
           <button onClick={handleAddBudget} className="btn bg-white text-purple-700 font-semibold">
-            Dodaj budżet
+            Add Budget
           </button>
         </div>
 
